@@ -1,0 +1,44 @@
+<div *ngFor="let card of cards">
+  <div class="w-1/3 py-4 mx-auto">
+    <div class="py-4 flex justify-between border-2 rounded-xl">
+      <div class="pl-6 py-2">
+        <div>
+          <label>No. of hours: </label>
+          {{ card.hours }}
+        </div>
+        <div>
+          <label>Tag: </label>
+          {{ card.tag }}
+        </div>
+        <div>
+          <label>Activity: </label>
+          {{ card.activity }}
+        </div>
+        <div>
+          <label>Created: </label>
+          {{ card.createdAt | date : "MM-dd-YYYY hh:mm:ss OOOO" }}
+        </div>
+        <div>
+          <label>Updated: </label>
+          {{ card.updatedAt | date : "MM-dd-YYYY hh:mm:ss OOOO" }}
+        </div>
+      </div>
+      <div class="pr-6 py-2">
+        <div class="pb-2">
+          <div
+            class="py-1 bg-red-600 rounded-full w-16 text-center text-xs text-white"
+          >
+            <button>Delete</button>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div
+            class="py-1 bg-green-600 rounded-full w-16 text-center text-xs text-white"
+          >
+            <button>Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
