@@ -15,7 +15,15 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, CardComponent, ChartComponent, HeaderComponent, LoginComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    FormComponent,
+    CardComponent,
+    ChartComponent,
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

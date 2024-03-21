@@ -21,6 +21,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
   {
     path: '',
     redirectTo: '/check-in',
@@ -29,11 +30,8 @@ const routes: Routes = [
   {
     path: '**',
     component: FormComponent,
-  }
-  ];
-
-const routes: Routes = [
-  
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
