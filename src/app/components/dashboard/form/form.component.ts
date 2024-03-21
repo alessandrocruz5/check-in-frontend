@@ -22,17 +22,13 @@ export class FormComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.message = `Welcome, ${res.name}!`;
-          Emitters.authEmitter.emit(true);
+          Emitters.authEmitter.emit((this.authenticated = true));
         },
         (err) => {
           this.message = 'You are not logged in.';
-          Emitters.authEmitter.emit(false);
+          Emitters.authEmitter.emit((this.authenticated = false));
         }
       );
-
-    Emitters.authEmitter.subscribe((isAuthenticated: boolean) => {
-      this.authenticated = isAuthenticated;
-    });
   }
 
   checkInForm = new FormGroup({
