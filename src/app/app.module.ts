@@ -9,9 +9,11 @@ import { FormComponent } from './components/dashboard/form/form.component';
 import { CardComponent } from './components/dashboard/card/card.component';
 import { ChartComponent } from './components/dashboard/chart/chart.component';
 import { HeaderComponent } from './components/common/header/header.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, CardComponent, ChartComponent, HeaderComponent],
+  declarations: [AppComponent, FormComponent, CardComponent, ChartComponent, HeaderComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
