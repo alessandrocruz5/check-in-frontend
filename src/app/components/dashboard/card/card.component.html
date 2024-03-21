@@ -1,4 +1,7 @@
-<div class="grid grid-cols-3">
+<div *ngIf="!authenticated">
+  {{ message }}
+</div>
+<div class="grid grid-cols-3" *ngIf="authenticated">
   <div *ngFor="let card of cards">
     <div class="py-10 w-5/6 mx-auto">
       <div class="py-4 flex justify-between border-2 rounded-xl">
