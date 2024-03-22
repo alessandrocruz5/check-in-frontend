@@ -23,6 +23,10 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'logout',
+    component: LoginComponent,
+  },
+  {
     path: '',
     redirectTo: '/check-in',
     pathMatch: 'full',

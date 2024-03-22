@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Chart, ChartDataset, ChartOptions } from 'chart.js/auto';
+import { Emitters } from 'src/app/emitters/emitters';
+import { Checkin } from 'src/app/model/checkin';
+import { DateChart } from 'src/app/model/datechart';
+import { TagChart } from 'src/app/model/tagchart';
+import { TagDateChart } from 'src/app/model/tagdatechart';
 import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
@@ -8,35 +14,64 @@ import { ChartService } from 'src/app/services/chart.service';
   styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent implements OnInit {
-  chart: any;
+  authenticated = false;
 
-  public chartOptions: ChartOptions = {
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true,
-      },
-      y: {
-        stacked: true,
-        beginAtZero: true,
-      },
-    },
-  };
+  constructor(
+    private chartService: ChartService,
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
+  ) {}
 
-  public chartLabels: any[] = [];
-  public chartType: string = 'bar';
-  public chartLegend: boolean = true;
-  public chartPlugins: any[] = [];
-  public chartData: ChartDataset[] = [];
-
-  constructor(private chartService: ChartService) {}
+  tagData: TagChart[] = [];
+  dateData: DateChart[] = [];
+  tagDateData: TagDateChart[] = [];
 
   ngOnInit(): void {
-    this.chartService.getData().subscribe((data: any) => {
-      this.chartLabels = data.map((d: any) => d.createdAt);
-      this.chartData = data.map((d: any) => {
-        return {};
-      });
+    this.http
+      .get('http://localhost:1217/api/user', {
+        withCredentials: true,
+      })
+      .subscribe(
+        (res: any) => {
+          Emitters.authEmitter.emit((this.authenticated = true));
+          this.getTagData();
+          this.getDateData();
+          this.getTagDateData();
+        },
+        (err) => {
+          Emitters.authEmitter.emit((this.authenticated = false));
+        }
+      );
+  }
+
+  getTagData() {
+    this.chartService.getCheckIns().subscribe((data: any) => {
+      this.tagData = data.map((entry) => ({
+        name: entry.tag,
+        value: entry.hours,
+      }));
+      console.log(this.tagData);
+      this.cdr.detectChanges();
+    });
+  }
+
+  getDateData() {
+    this.chartService.getCheckIns().subscribe((data: any) => {
+      this.dateData = data.map((entry) => ({
+        name: entry.createdAt,
+        value: entry.hours,
+      }));
+      this.cdr.detectChanges();
+    });
+  }
+
+  getTagDateData() {
+    this.chartService.getCheckIns().subscribe((data: any) => {
+      this.tagDateData = data.map((entry) => ({
+        name: entry.createdAt,
+        series: [{ name: entry.tag, value: entry.hours }],
+      }));
+      this.cdr.detectChanges();
     });
   }
 

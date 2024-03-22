@@ -1,19 +1,57 @@
-<div>
+<div class="p-10">
   <form [formGroup]="registerForm" (submit)="onSubmit()">
     <div>
-      <label for="name">Name: </label>
-      <input type="text" formControlName="name" required />
+      <label
+        for="name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Name:
+      </label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        class="bg-gray-50 border border-gray-300 text-orange-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-1/5 p-2.5 dark:bg-white-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 mx-auto"
+        placeholder="Name"
+        required
+      />
     </div>
     <div>
-      <label for="email">Email: </label>
-      <input type="email" formControlName="email" required />
+      <label
+        for="email"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Email:
+      </label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="bg-gray-50 border border-gray-300 text-orange-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-1/5 p-2.5 dark:bg-white-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 mx-auto"
+        placeholder="Email"
+        required
+      />
     </div>
     <div>
-      <label for="password">Password: </label>
-      <input type="password" formControlName="password" required />
+      <label
+        for="password"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Password:
+      </label>
+      <input
+        id="password"
+        type="password"
+        class="bg-gray-50 border border-gray-300 text-orange-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-1/5 p-2.5 dark:bg-white-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500 mx-auto"
+        placeholder="Password"
+        formControlName="password"
+        required
+      />
     </div>
-    <div>
-      <button type="submit">Submit</button>
+    <div class="py-10 text-center">
+      <button
+        type="submit"
+        class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>

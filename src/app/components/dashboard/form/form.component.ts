@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Emitters } from 'src/app/emitters/emitters';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -38,22 +39,41 @@ export class FormComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.checkInForm.value);
+    let checkIn = this.checkInForm.getRawValue();
 
-    const formData = this.checkInForm.value;
-    this.http
-      .post('http://localhost:1217/api/newCheckIn', formData, {
-        withCredentials: true,
-      })
-      .subscribe(
-        (res) => {
-          console.log('Activity checked in!', res);
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
+    if (checkIn.hours == '' || checkIn.tag == '' || checkIn.activity == '') {
+      Swal.fire({
+        title: 'Please enter all fields.',
+        icon: 'error',
+      });
+    } else {
+      let tagValue = this.checkInForm.get('tag').value;
+      if (!tagValue.startsWith('#')) {
+        tagValue = '#' + tagValue;
+        this.checkInForm.get('tag').setValue(tagValue);
+      }
 
-    this.checkInForm.reset();
+      console.log(this.checkInForm.value);
+      const formData = this.checkInForm.value;
+      this.http
+        .post('http://localhost:1217/api/newCheckIn', formData, {
+          withCredentials: true,
+        })
+        .subscribe(
+          (res) => {
+            console.log('Activity checked in!', res);
+            Swal.fire({
+              title: 'Activity tracked!',
+              icon: 'success',
+              footer: '<a href="/view">View check-ins?</a>',
+            });
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
+
+      this.checkInForm.reset();
+    }
   }
 }

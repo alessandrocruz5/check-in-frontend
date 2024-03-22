@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Emitters } from 'src/app/emitters/emitters';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  authenticated = false;
 
   constructor(
     private http: HttpClient,
@@ -19,6 +21,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    Emitters.authEmitter.subscribe((isAuthenticated: boolean) => {
+      this.authenticated = isAuthenticated;
+    });
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -44,10 +50,16 @@ export class LoginComponent implements OnInit {
     console.log(user);
 
     if (user.email == '' || user.password == '') {
-      Swal.fire('Error', 'Please enter all fields', 'error');
+      Swal.fire({
+        title: 'Please enter all fields.',
+        icon: 'error',
+      });
       this.loginForm.reset();
     } else if (!this.validateEmail(user.email)) {
-      Swal.fire('Error', 'Please enter a valid email.', 'error');
+      Swal.fire({
+        title: 'Please enter a valid email.',
+        icon: 'error',
+      });
       this.loginForm.reset();
     } else {
       this.http
