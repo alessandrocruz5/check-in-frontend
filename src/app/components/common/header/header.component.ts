@@ -19,10 +19,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.authenticated = false;
     this.http
       .post('http://localhost:1217/api/logout', null, {
         withCredentials: true,
       })
-      .subscribe(() => (this.authenticated = false));
+      .subscribe();
   }
 }
