@@ -54,10 +54,16 @@ export class RegisterComponent implements OnInit {
     console.log(user);
 
     if (user.name == '' || user.email == '' || user.password == '') {
-      Swal.fire('Error', 'Please enter all fields', 'error');
+      Swal.fire({
+        title: 'Please enter all fields.',
+        icon: 'error',
+      });
       this.registerForm.reset();
     } else if (!this.validateEmail(user.email)) {
-      Swal.fire('Error', 'Please enter a valid email.', 'error');
+      Swal.fire({
+        title: 'Please enter a valid email.',
+        icon: 'error',
+      });
       this.registerForm.reset();
     } else {
       this.http

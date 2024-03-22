@@ -50,10 +50,16 @@ export class LoginComponent implements OnInit {
     console.log(user);
 
     if (user.email == '' || user.password == '') {
-      Swal.fire('Error', 'Please enter all fields', 'error');
+      Swal.fire({
+        title: 'Please enter all fields.',
+        icon: 'error',
+      });
       this.loginForm.reset();
     } else if (!this.validateEmail(user.email)) {
-      Swal.fire('Error', 'Please enter a valid email.', 'error');
+      Swal.fire({
+        title: 'Please enter a valid email.',
+        icon: 'error',
+      });
       this.loginForm.reset();
     } else {
       this.http

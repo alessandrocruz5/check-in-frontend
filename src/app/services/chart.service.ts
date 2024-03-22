@@ -17,4 +17,8 @@ export class ChartService {
   deleteCheckIn(checkInId: string) {
     return this.http.delete<Checkin>(`${this.apiUrl}/check-ins/${checkInId}`);
   }
+
+  getTagData() {
+    return this.http.get<Checkin[]>(`${this.apiUrl}/forms`);
+  }
 }

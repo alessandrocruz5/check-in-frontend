@@ -1,15 +1,20 @@
-<div *ngIf="!authenticated">
-  {{ message }}
-</div>
-<div class="grid grid-cols-3" *ngIf="authenticated">
-  <mat-paginator
-    [length]="totalCards"
-    [pageSize]="pageSize"
-    (page)="onPageChange($event)"
+<div class="p-10">
+  <div
+    class="text-center bg-gray-100 mx-auto w-2/5 rounded-xl"
+    *ngIf="!authenticated"
   >
+    <div
+      class="text-center text-sm text-orange-500 font-semibold uppercase tracking-widest py-10"
+    >
+      {{ message }}
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-5" *ngIf="authenticated">
     <div *ngFor="let card of cards">
-      <div class="py-10 w-5/6 mx-auto">
-        <div class="py-4 flex justify-between border-2 rounded-xl">
+      <div class="w-5/6 mx-auto">
+        <div
+          class="py-4 flex justify-between border-2 rounded-xl bg-orange-500 text-white"
+        >
           <div class="pl-6 py-2">
             <div>
               <label>Owner: </label>
@@ -44,17 +49,12 @@
                 <button (click)="onDelete(card._id)">Delete</button>
               </div>
             </div>
-            <div class="pt-2">
-              <div
-                class="py-1 bg-green-600 rounded-full w-16 text-center text-xs text-white"
-              >
-                <button>Edit</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <mat-paginator #paginator [length]="totalCards" [pageSize]="pageSize">
   </mat-paginator>
+  <app-chart></app-chart>
 </div>
-<app-chart></app-chart>
