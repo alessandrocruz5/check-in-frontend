@@ -1,1 +1,52 @@
-<p>chart works!</p>
+<div class="grid grid-cols-3 gap-1" *ngIf="authenticated">
+  <!-- <canvas id="MyChart">{{ chart }}</canvas> -->
+  <div>
+    <ngx-charts-bar-vertical
+      [view]="[600, 400]"
+      [results]="tagData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [yScaleMin]="0"
+      [yScaleMax]="20"
+      [legend]="true"
+      [legendTitle]="'Tags'"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Tags'"
+      [showYAxisLabel]="true"
+      [yAxisLabel]="'No. of hours'"
+      [showDataLabel]="true"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+  <div>
+    <ngx-charts-bar-vertical
+      [view]="[600, 400]"
+      [results]="dateData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [legendTitle]="'Dates'"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Dates'"
+      [showYAxisLabel]="true"
+      [yAxisLabel]="'No. of hours'"
+      [showDataLabel]="true"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+  <div>
+    <ngx-charts-bar-vertical-stacked
+      [view]="[600, 400]"
+      [results]="tagDateData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [legendTitle]="'Dates'"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Dates'"
+      [showYAxisLabel]="true"
+      [yAxisLabel]="'Time (hours)'"
+    >
+    </ngx-charts-bar-vertical-stacked>
+  </div>
+</div>

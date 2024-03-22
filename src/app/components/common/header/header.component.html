@@ -1,4 +1,44 @@
 <header class="bg-white shadow-md sticky top-0 z-50 h-12">
-  <a href="#">Track</a>
-  <a href="#">View</a>
+  <div class="flex items-center justify-center h-full mx-auto">
+    <a
+      routerLink="/check-in"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="px-3 text-base font-semibold text-orange-500 uppercase tracking-widest hover:text-orange-700"
+      >Track</a
+    >
+    <a
+      routerLink="/view"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="px-3 text-base font-semibold text-orange-500 uppercase tracking-widest hover:text-orange-700"
+      >View</a
+    >
+    <div *ngIf="!authenticated">
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="px-3 text-base font-semibold text-orange-500 uppercase tracking-widest hover:text-orange-700"
+        >Login</a
+      >
+      <a
+        routerLink="/register"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="px-3 text-base font-semibold text-orange-500 uppercase tracking-widest hover:text-orange-700"
+        >Register</a
+      >
+    </div>
+    <div *ngIf="authenticated">
+      <a
+        routerLink="/logout"
+        (click)="logout()"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="px-3 text-base font-semibold text-orange-500 uppercase tracking-widest hover:text-gray-700"
+        >Logout</a
+      >
+    </div>
+  </div>
 </header>

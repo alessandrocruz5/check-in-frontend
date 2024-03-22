@@ -1,44 +1,70 @@
-<div *ngFor="let card of cards">
-  <div class="w-1/3 py-4 mx-auto">
-    <div class="py-4 flex justify-between border-2 rounded-xl">
-      <div class="pl-6 py-2">
-        <div>
-          <label>No. of hours: </label>
-          {{ card.hours }}
-        </div>
-        <div>
-          <label>Tag: </label>
-          {{ card.tag }}
-        </div>
-        <div>
-          <label>Activity: </label>
-          {{ card.activity }}
-        </div>
-        <div>
-          <label>Created: </label>
-          {{ card.createdAt | date : "MM-dd-YYYY hh:mm:ss OOOO" }}
-        </div>
-        <div>
-          <label>Updated: </label>
-          {{ card.updatedAt | date : "MM-dd-YYYY hh:mm:ss OOOO" }}
-        </div>
-      </div>
-      <div class="pr-6 py-2">
-        <div class="pb-2">
-          <div
-            class="py-1 bg-red-600 rounded-full w-16 text-center text-xs text-white"
-          >
-            <button>Delete</button>
+<div class="p-10">
+  <div
+    class="text-center bg-gray-100 mx-auto w-2/5 rounded-xl"
+    *ngIf="!authenticated"
+  >
+    <div
+      class="text-center text-sm text-orange-500 font-semibold uppercase tracking-widest py-10"
+    >
+      {{ message }}
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-5 pb-10" *ngIf="authenticated">
+    <div
+      *ngFor="
+        let card of cards | paginate : { itemsPerPage: 6, currentPage: p }
+      "
+    >
+      <div class="w-5/6 mx-auto">
+        <div
+          class="py-4 flex justify-between border-2 rounded-xl bg-orange-500 text-white"
+        >
+          <div class="pl-6 py-2">
+            <div>
+              <label>Owner: </label>
+              {{ card.userName }}
+            </div>
+            <div>
+              <label>No. of hours: </label>
+              {{ card.hours }}
+            </div>
+            <div>
+              <label>Tag: </label>
+              {{ card.tag }}
+            </div>
+            <div>
+              <label>Activity: </label>
+              {{ card.activity }}
+            </div>
+            <div>
+              <label>Created: </label>
+              {{ card.createdAt | date : "MMMM dd, YYYY" }}
+            </div>
+            <div>
+              <label>Updated: </label>
+              {{ card.updatedAt | date : "MMMM dd, YYYY" }}
+            </div>
           </div>
-        </div>
-        <div class="pt-2">
-          <div
-            class="py-1 bg-green-600 rounded-full w-16 text-center text-xs text-white"
-          >
-            <button>Edit</button>
+          <div class="pr-6 py-2">
+            <div class="pb-2">
+              <div
+                class="py-1 bg-red-600 rounded-full w-16 text-center text-xs text-white"
+              >
+                <button (click)="onDelete(card._id)">Delete</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="mx-auto">
+    <pagination-controls
+      class="py-10"
+      (pageChange)="p = $event"
+      [maxSize]="6"
+      [directionLinks]="true"
+    ></pagination-controls>
+  </div>
+  <app-chart></app-chart>
 </div>
