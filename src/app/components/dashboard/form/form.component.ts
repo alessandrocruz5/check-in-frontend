@@ -41,14 +41,18 @@ export class FormComponent implements OnInit {
     console.log(this.checkInForm.value);
 
     const formData = this.checkInForm.value;
-    this.http.post('http://localhost:1217/api/newForm', formData).subscribe(
-      (res) => {
-        console.log('Activity checked in!', res);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    this.http
+      .post('http://localhost:1217/api/newCheckIn', formData, {
+        withCredentials: true,
+      })
+      .subscribe(
+        (res) => {
+          console.log('Activity checked in!', res);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
 
     this.checkInForm.reset();
   }
