@@ -30,11 +30,6 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
-  // registerForm = new FormGroup({
-  //   name: new FormControl('', Validators.required),
-  //   email: new FormControl('', Validators.required),
-  //   password: new FormControl('', Validators.required),
-  // });
 
   validateEmail(email: any) {
     const validRegex =

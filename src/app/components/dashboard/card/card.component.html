@@ -9,8 +9,12 @@
       {{ message }}
     </div>
   </div>
-  <div class="grid grid-cols-3 gap-5" *ngIf="authenticated">
-    <div *ngFor="let card of cards">
+  <div class="grid grid-cols-3 gap-5 pb-10" *ngIf="authenticated">
+    <div
+      *ngFor="
+        let card of cards | paginate : { itemsPerPage: 6, currentPage: p }
+      "
+    >
       <div class="w-5/6 mx-auto">
         <div
           class="py-4 flex justify-between border-2 rounded-xl bg-orange-500 text-white"
@@ -54,7 +58,13 @@
       </div>
     </div>
   </div>
-  <mat-paginator #paginator [length]="totalCards" [pageSize]="pageSize">
-  </mat-paginator>
+  <div class="mx-auto">
+    <pagination-controls
+      class="py-10"
+      (pageChange)="p = $event"
+      [maxSize]="6"
+      [directionLinks]="true"
+    ></pagination-controls>
+  </div>
   <app-chart></app-chart>
 </div>

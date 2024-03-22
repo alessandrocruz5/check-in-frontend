@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Emitters } from 'src/app/emitters/emitters';
 import { Checkin } from 'src/app/model/checkin';
@@ -11,6 +17,7 @@ import { Observable } from 'rxjs';
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardComponent implements OnInit {
   cards: Checkin[] = [];
@@ -20,6 +27,7 @@ export class CardComponent implements OnInit {
 
   totalCards = this.cards.length;
   pageSize = 6;
+  p: number = 1;
 
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -90,7 +98,4 @@ export class CardComponent implements OnInit {
       startIndex + event.pageSize
     );
   }
-  // isOwner(checkIn: Checkin): boolean {
-
-  // }
 }
