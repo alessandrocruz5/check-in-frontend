@@ -8,6 +8,6 @@ export class ChartService {
   constructor(private http: HttpClient) {}
 
   getData() {
-    return this.http.get('http://localhost:1217/api/forms');
+    return this.http.get('http://localhost:1217/api/check-ins');
   }
 }
