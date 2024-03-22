@@ -38,8 +38,13 @@ export class FormComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.checkInForm.value);
+    let tagValue = this.checkInForm.get('tag').value;
+    if (!tagValue.startsWith('#')) {
+      tagValue = '#' + tagValue;
+      this.checkInForm.get('tag').setValue(tagValue);
+    }
 
+    console.log(this.checkInForm.value);
     const formData = this.checkInForm.value;
     this.http
       .post('http://localhost:1217/api/newCheckIn', formData, {

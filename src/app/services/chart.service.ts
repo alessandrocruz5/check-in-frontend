@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Checkin } from '../model/checkin';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
+  private apiUrl = 'http://localhost:1217/api';
+
   constructor(private http: HttpClient) {}
 
-  getData() {
-    return this.http.get('http://localhost:1217/api/check-ins');
+  getCheckIns() {
+    return this.http.get<Checkin[]>(`${this.apiUrl}/forms`);
   }
 }

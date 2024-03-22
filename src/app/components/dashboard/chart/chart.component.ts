@@ -32,12 +32,12 @@ export class ChartComponent implements OnInit {
   constructor(private chartService: ChartService) {}
 
   ngOnInit(): void {
-    this.chartService.getData().subscribe((data: any) => {
-      this.chartLabels = data.map((d: any) => d.createdAt);
-      this.chartData = data.map((d: any) => {
-        return {};
-      });
-    });
+    // this.chartService.getData().subscribe((data: any) => {
+    //   this.chartLabels = data.map((d: any) => d.createdAt);
+    //   this.chartData = data.map((d: any) => {
+    //     return {};
+    //   });
+    // });
   }
 
   getRandomColor(): string {
