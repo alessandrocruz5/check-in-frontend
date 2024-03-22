@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/dashboard/form/form.component';
@@ -32,6 +34,7 @@ import { RegisterComponent } from './components/auth/register/register.component
     HttpClientModule,
     BrowserAnimationsModule,
     NgxChartsModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

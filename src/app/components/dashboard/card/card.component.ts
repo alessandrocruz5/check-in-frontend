@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Emitters } from 'src/app/emitters/emitters';
 import { Checkin } from 'src/app/model/checkin';
 import { ChartService } from 'src/app/services/chart.service';
@@ -13,6 +14,9 @@ export class CardComponent implements OnInit {
   cards: Checkin[] = [];
   authenticated = false;
   message: any;
+
+  totalCards = this.cards.length;
+  pageSize = 6;
 
   constructor(private chartService: ChartService, private http: HttpClient) {}
 
@@ -48,4 +52,22 @@ export class CardComponent implements OnInit {
       }
     );
   }
+
+  onDelete(checkInId: string) {
+    this.chartService.deleteCheckIn(checkInId).subscribe((res) => {
+      this.fetchCards();
+      this.cards = this.cards.filter((entry) => entry._id !== checkInId);
+      console.log('Deleted successfully.', res),
+        (err) => {
+          console.error('Error in deletion.', err);
+        };
+    });
+  }
+
+  onPageChange(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+  }
+  // isOwner(checkIn: Checkin): boolean {
+
+  // }
 }
